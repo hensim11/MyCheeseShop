@@ -1,6 +1,13 @@
 ﻿@page "/"
+@inject CheeseProvider CheeseProvider
+@using MyCheeseShop.Context
+@using MyCheeseShop.Model;
 
-<PageTitle>Home</PageTitle>
+@code {
+    private IEnumerable<Cheese> cheeses;
 
-<h1>Hello, world!</h1>
-
+    protected override async Task OnInitializedAsync()
+    {
+        cheeses = await CheeseProvider.GetAllCheesesAsync();
+    }
+}
