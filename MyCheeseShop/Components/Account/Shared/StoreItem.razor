@@ -1,12 +1,9 @@
-﻿
-@inject ShoppingCart ShoppingCart 
+﻿@inject ShoppingCart ShoppingCart 
 @using MyCheeseShop.Model;
 
-<h3>StoreItem</h3>
-@using MyCheeseShop.Model;
 
 <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top" alt="...">
     <div class="card-body">
         <h4 class="card-title">@Cheese.Name</h4>
         <h6 class="card-title">@Cheese.Type, @Cheese.Strength</h6>
