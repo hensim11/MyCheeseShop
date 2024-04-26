@@ -1,16 +1,12 @@
 ﻿@page "/"
 @inject CheeseProvider CheeseProvider
 @inject NavigationManager NavigationManager
+@inject ShoppingCart ShoppingCart
 @using MyCheeseShop.Context
-@using MyCheeseShop.Model;
+@using MyCheeseShop.Model
 @using MyCheeseShop.Components.Account.Shared
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-</div>
+
 
 
 
@@ -28,17 +24,16 @@ else if (!cheeses.Any())
 
 <input type="text" class="form-control" placeholder="Search for cheese....." @bind="searchTerm" @bind:event="oninput" />
 
-
-@foreach (var cheese in FilteredCheeses)
+<div class="row">
+    @foreach (var cheese in FilteredCheeses)
 {
     <div class="col">
         <StoreItem Cheese="cheese" />
     </div>
 }
-@if (!FilteredCheeses.Any())
-{
-    <p>No cheeses found</p>
-}
+</div>
+
+
 
 
 

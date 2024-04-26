@@ -1,21 +1,32 @@
-﻿@inject ProtectedSessionStorage ProtectedSessionStore
+﻿
 @inject ShoppingCart ShoppingCart 
+@using MyCheeseShop.Model;
 
 <h3>StoreItem</h3>
 @using MyCheeseShop.Model;
 
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h4 class="card-title">@Cheese.Name</h4>
+        <h6 class="card-title">@Cheese.Type, @Cheese.Strength</h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Action
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+        <a href="#" class="btn btn-primary">Add to cart</a>
+    </div>
+
+</div>
 
 
-@foreach (var cheese in FilteredCheeses)
-{
-        <div class="col">
-            <StoreItem Cheese="cheese" />
-        </div>
-}
-@if (!FilteredCheeses.Any())
-{
-        <p>No cheeses found</p>
-}
 
 @code {
     [Parameter]
@@ -27,7 +38,6 @@
 
     public async Task AddToCart()
     {
-        ShoppingCart.AddItem(Cheese, quantity);
-        await PotectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
+     
     }
 }
