@@ -69,7 +69,7 @@ namespace MyCheeseShop.Context
                 new Cheese { Name = "Goat Cheese", Type = "Soft", Description = "Tangy and earthy", Strength = "Mild", Price = 13.99m, ImageUrl="GoatCheese.png" },
                 new Cheese { Name = "Gruyere", Type = "Hard", Description = "Rich and nutty", Strength = "Medium", Price = 15.75m, ImageUrl="Gruyere.png" },
                 new Cheese { Name = "Mozzarella", Type = "Soft", Description = "Mild and milky", Strength = "Mild", Price = 8.99m, ImageUrl="Mozzarella.png" },
-                new Cheese { Name = "Swiss Cheese", Type = "Hard", Description = "Sweet and nutty", Strength = "Medium", Price = 10.25m, ImageUrl="SwissCheese.png" },
+                new Cheese { Name = "Swiss Cheese", Type = "Hard", Description = "Sweet and nutty", Strength = "Medium", Price = 10.25m, ImageUrl="Swiss.png" },
                 new Cheese { Name = "Feta Cheese", Type = "Soft", Description = "Tangy and salty", Strength = "Strong", Price = 13.49m, ImageUrl="Feta.png" },
                 new Cheese { Name = "Provolone", Type = "Semi-hard", Description = "Sharp and smooth", Strength = "Medium", Price = 9.99m, ImageUrl="Provolone.png" },
                 new Cheese { Name = "Camembert", Type = "Soft", Description = "Creamy and earthy", Strength = "Mild", Price = 11.99m, ImageUrl="Camembert.png" },

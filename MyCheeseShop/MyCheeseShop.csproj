@@ -18,6 +18,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\database\" />
+    <Folder Include="Components\Shared\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Components\Shared\" />
+  </ItemGroup>
 </Project>

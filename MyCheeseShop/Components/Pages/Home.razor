@@ -4,8 +4,7 @@
 @inject ShoppingCart ShoppingCart
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
-@using MyCheeseShop.Components.Account.Shared
-
+@using MyCheeseShop.Components.Shared
 
 
 
@@ -26,7 +25,7 @@ else if (!cheeses.Any())
 <input type="text" class="form-control" placeholder="Search for cheese....." @bind="searchTerm" @bind:event="oninput" />
 
 <div class="row">
-    @foreach (var cheese in FilteredCheeses)
+    @foreach (var cheese in cheeses)
 {
     <div class="col">
         <StoreItem Cheese="cheese" />
