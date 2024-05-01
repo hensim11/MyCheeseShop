@@ -1,6 +1,7 @@
 ﻿@inject ShoppingCart ShoppingCart 
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Model;
-@inject ProtectedSessionStorage ProtectedSessionStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
 @inject ShoppingCart ShoppingCart
 
 
@@ -38,6 +39,6 @@
     public async Task AddToCart()
     {
         ShoppingCart.AddItem(Cheese, quantity);
-        
+        await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
     }
 }

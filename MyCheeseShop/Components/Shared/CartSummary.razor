@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ShoppingCart ShoppingCart
+@inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
+@using MyCheeseShop.Model
+
+@code {
+    [Parameter]
+    public bool IsEditable { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        ShoppingCart.OnCartUpdated += async () => await CartUpdated();
+    }
+
+    private async Task CartUpdated()
+    {
+        StateHasChanged();
+        await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
+    }
+}
