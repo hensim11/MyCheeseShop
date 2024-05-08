@@ -4,6 +4,8 @@ namespace MyCheeseShop.Context
 {
     public class UserProvider
     {
+        private User user;
+    
         private readonly DatabaseContext _context;
         public UserProvider(DatabaseContext context)
         {
