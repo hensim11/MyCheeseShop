@@ -5,6 +5,7 @@
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
+@using MyCheeseShop.Components.Shared
 @inject UserProvider UserProvider
 @inject OrderProvider OrderProvider
 @inject ShoppingCart ShoppingCart
@@ -14,13 +15,47 @@
 @attribute [Authorize]
 
 
-<h2>Checkout</h2>
-    <div class="card mb-1">
-    <div class="card-body bg-light">
-        <h4 class="card-title">Order Summary</h4>
-        <CartSummary />
+<head>
+    <link rel="stylesheet" href="~/css/checkout.css" />
+</head>
+
+<h1 class="checkout-title">Checkout</h1>
+
+<div class="row justify-content-center mb-4">
+    <div class="col-lg-6 col-md-8 col-12 mt-1">
+        <div class="order-summary">
+            <h3 class="fs-4 text-center mb-3">Order Summary</h3>
+            <CartSummary />
+        </div>
     </div>
 </div>
+
+<EditForm EditContext="editContext" OnValidSubmit="MakePayment">
+    <DataAnnotationsValidator />
+    <ValidationSummary class="validation-summary" />
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-12 mt-1">
+            <div class="card card-custom h-100">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Customer Information</h4>
+                    <div class="form-group mb-3">
+                        <label for="customerName" class="form-label">Name</label>
+                        <input id="customerName" class="form-control" value="@GetFormattedName(user)" disabled />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-6 col-md-8 col-12">
+            <button type="submit" class="btn btn-primary submit-button">Make Payment</button>
+        </div>
+    </div>
+</EditForm>
+
+
 
 
 
@@ -33,6 +68,7 @@
     private PaymentDetails paymentDetails;
     private User user;
     private bool isPaying;
+    private EditContext editContext;
 
     private sealed class PaymentDetails
     {
@@ -53,6 +89,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        paymentDetails = new PaymentDetails();
+        editContext = new EditContext(paymentDetails);
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var username = authState!.User!.Identity!.Name!;
         user = UserProvider.GetUserByUsername(username)!;
@@ -75,4 +113,10 @@
         isPaying = false;
         StateHasChanged();
     }
+
+    private string GetFormattedName(User user)
+    {
+        return $"{user.FirstName} {user.FirstName}";
+    }
+
 }
