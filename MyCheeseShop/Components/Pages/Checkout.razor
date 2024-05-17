@@ -43,16 +43,52 @@
                         <label for="customerName" class="form-label">Name</label>
                         <input id="customerName" class="form-control" value="@GetFormattedName(user)" disabled />
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="customerAddress" class="form-label">Address</label>
+                        <input id="customerAddress" class="form-control" value="@GetFormattedAddress(user)" disabled />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input placeholder="email" class="form-control" value="@user.Email" disabled />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row justify-content-center mt-3">
-        <div class="col-lg-6 col-md-8 col-12">
-            <button type="submit" class="btn btn-primary submit-button">Make Payment</button>
+    <form class="credit-card">
+        <div class="card h-100">
+            <h4 class="card-title">Payment</h4>
+            <div class="form-group mb-3">
+                <label class="form-label">Name on card</label>
+                <InputText class="form-control" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Card number</label>
+                <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Expiry Date</label>
+                <InputText class="form-control" placeholder="00/00" @bind-Value="paymentDetails.ExpiryDate" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Security Code</label>
+                <InputText class="form-control" placeholder="000" @bind-Value="paymentDetails.SecurityCode" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-danger">
+                    @if (isPaying)
+                    {
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    }
+                    else
+                    {
+                        <span>💳</span>
+                    }
+                    <span> Pay Now</span>
+                </button>
+            </div>
         </div>
-    </div>
+    </form>  
 </EditForm>
 
 
@@ -109,7 +145,7 @@
     {
         isPaying = true;
         StateHasChanged();
-        await Task.Delay(2000);
+        await Task.Delay(1500);
         isPaying = false;
         StateHasChanged();
     }
@@ -117,6 +153,11 @@
     private string GetFormattedName(User user)
     {
         return $"{user.FirstName} {user.FirstName}";
+    }
+
+    private string GetFormattedAddress(User user)
+    {
+        return $"{user.Address}{Environment.NewLine}{user.City}{Environment.NewLine}{user.PostCode}";
     }
 
 }
