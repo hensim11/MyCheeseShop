@@ -32,7 +32,7 @@
 
 <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
     <DataAnnotationsValidator />
-    <ValidationSummary class="validation-summary" />
+    
 
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-12 mt-1">
@@ -60,29 +60,25 @@
             <h4 class="card-title">Payment</h4>
             <div class="form-group mb-3">
                 <label class="form-label">Name on card</label>
-                <InputText class="form-control" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
+                <InputText class="form-control payment-form-input" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Card number</label>
-                <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
+                <InputText class="form-control payment-form-input" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Expiry Date</label>
-                <InputText class="form-control" placeholder="00/00" @bind-Value="paymentDetails.ExpiryDate" />
+                <InputText class="form-control payment-form-input" placeholder="00/00" @bind-Value="paymentDetails.ExpiryDate" />
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Security Code</label>
-                <InputText class="form-control" placeholder="000" @bind-Value="paymentDetails.SecurityCode" />
+                <InputText class="form-control payment-form-input" placeholder="000" @bind-Value="paymentDetails.SecurityCode" />
             </div>
             <div>
                 <button type="submit" class="btn btn-outline-danger">
                     @if (isPaying)
                     {
                         <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                    }
-                    else
-                    {
-                        <span>💳</span>
                     }
                     <span> Pay Now</span>
                 </button>
