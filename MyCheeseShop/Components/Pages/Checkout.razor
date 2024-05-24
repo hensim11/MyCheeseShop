@@ -17,87 +17,91 @@
 
 
 
-<div class="row justify-content-start mb-4">
-    <div class="col-lg-6 col-md-8 col-12 mt-1">
-        <div class="order-summary">
-            <h3 class="fs-4 text-center mb-3">Order Summary</h3>
-            <CartSummary />
+<div class="container-fluid py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12 mb-5">
+                <div class="order-summary card shadow-sm border-0 mb-5">
+                    <div class="card-header bg-warning text-dark text-center">
+                        <h3 class="fs-4 mb-0">Order Summary</h3>
+                    </div>
+                    <div class="card-body">
+                        <CartSummary />
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
+            <DataAnnotationsValidator />
+
+            <h1 class="checkout-title text-center mb-5">Checkout</h1>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 col-12 mb-5">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-warning text-dark text-center">
+                            <h4 class="mb-0">Customer Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Name</label>
+                                <input class="form-control" value="@GetFormattedName(user)" disabled />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Address</label>
+                                <input class="form-control" value="@GetFormattedAddress(user)" disabled />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Email</label>
+                                <input class="form-control" value="@user.Email" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 col-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-warning text-dark text-center">
+                            <h4 class="mb-0">Payment</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Card Name</label>
+                                <InputText class="form-control" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Card Number</label>
+                                <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Expiry Date</label>
+                                <InputText class="form-control" placeholder="MM/YY" @bind-Value="paymentDetails.ExpiryDate" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Security Code</label>
+                                <InputText class="form-control" placeholder="123" @bind-Value="paymentDetails.SecurityCode" />
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-warning btn-lg btn-block">
+                                    <span>Pay here</span>
+                                    @if (isPaying)
+                                    {
+                                        <div class="spinner-border spinner-border-sm ms-2" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    }
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
     </div>
 </div>
-
-
-
-<EditForm EditContext="editContext" OnValidSubmit="MakePayment">
-    <DataAnnotationsValidator />
-
-    <h1 class="checkout-title text-center">Checkout</h1>
-
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 col-12">
-                <div class="card shadow-sm border-0 cheese-card">
-                    <div class="card-header bg-warning text-dark text-center">
-                        <h4>Customer Information</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group mb-3">
-                            <label class="form-label">Name</label>
-                            <input class="form-control" value="@GetFormattedName(user)" disabled />
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Address</label>
-                            <input class="form-control" value="@GetFormattedAddress(user)" disabled />
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Email</label>
-                            <input class="form-control" value="@user.Email" disabled />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 col-12">
-                <div class="card shadow-sm border-0 cheese-card">
-                    <div class="card-header bg-warning text-dark text-center">
-                        <h4>Payment</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group mb-3">
-                            <label class="form-label">Card Name</label>
-                            <InputText class="form-control" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Card Number</label>
-                            <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Expiry Date</label>
-                            <InputText class="form-control" placeholder="MM/YY" @bind-Value="paymentDetails.ExpiryDate" />
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Security Code</label>
-                            <InputText class="form-control" placeholder="123" @bind-Value="paymentDetails.SecurityCode" />
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-warning btn-cheese">
-                                <span>Make Payment</span>
-                                @if (isPaying)
-                                {
-                                    <span class="spinner-border spinner-border-sm ms-2" aria-hidden="true"></span>
-                                }
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</EditForm>
 
 <link rel="stylesheet" href="Checkout.css">
 
